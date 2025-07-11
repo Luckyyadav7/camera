@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Live Camera & Mic Test - Lucky</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        video {
+            width: 80%;
+            max-width: 600px;
+            border: 4px solid #00ffcc;
+            border-radius: 16px;
+            box-shadow: 0 0 20px #00ffcc88;
+        }
+
+        .info {
+            margin-top: 20px;
+            color: #ccc;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <video id="liveVideo" autoplay muted playsinline></video>
+    <div class="info">🎥 Camera + 🎤 Mic Test — Allow Permissions to View Yourself</div>
+
+    <script>
+        async function startStream() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                const videoElement = document.getElementById("liveVideo");
+                videoElement.srcObject = stream;
+
+                console.log("Camera and mic access granted.");
+            } catch (err) {
+                console.error("Error accessing camera/mic:", err);
+                alert("Permission denied or device not available.");
+            }
+        }
+
+        startStream();
+    </script>
+
+</body>
+
+</html>
